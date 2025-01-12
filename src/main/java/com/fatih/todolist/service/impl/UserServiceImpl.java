@@ -43,7 +43,7 @@ public class UserServiceImpl implements IUserService {
                 .orElseThrow(() -> new NotFoundException("User", id));
         user.setUsername(updatedUser.getUsername());
         user.setPassword(updatedUser.getPassword());
-        user.setRole(updatedUser.getRole());
+        user.setRoles(updatedUser.getRoles());
 
         return userRepository.save(user);
     }
