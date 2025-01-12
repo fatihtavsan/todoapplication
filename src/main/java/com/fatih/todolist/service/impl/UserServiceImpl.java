@@ -1,7 +1,7 @@
 package com.fatih.todolist.service.impl;
 
 import com.fatih.todolist.entity.User;
-import com.fatih.todolist.exception.TodoNotFoundException;
+import com.fatih.todolist.exception.NotFoundException;
 import com.fatih.todolist.repository.UserRepository;
 import com.fatih.todolist.service.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUserService {
         if (user.isPresent()) {
             return user;
         } else {
-            throw new TodoNotFoundException("Todo with id " + id + " not found!");
+            throw new NotFoundException("User", id);
         }
     }
 
@@ -40,7 +40,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User updateUser(Long id, User updatedUser) {
         User user = getUserById(id)
-                .orElseThrow(() -> new TodoNotFoundException("User with id " + id + " not found!"));
+                .orElseThrow(() -> new NotFoundException("User", id));
         user.setUsername(updatedUser.getUsername());
         user.setPassword(updatedUser.getPassword());
         user.setRole(updatedUser.getRole());
@@ -55,7 +55,7 @@ public class UserServiceImpl implements IUserService {
             userRepository.deleteById(id);
             return true;
         } else {
-            throw new TodoNotFoundException("User with id " + id + " not found!");
+            throw new NotFoundException("User", id);
         }
     }
 }

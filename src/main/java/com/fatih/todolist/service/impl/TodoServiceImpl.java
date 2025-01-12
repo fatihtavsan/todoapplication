@@ -1,7 +1,7 @@
 package com.fatih.todolist.service.impl;
 
 import com.fatih.todolist.entity.Todo;
-import com.fatih.todolist.exception.TodoNotFoundException;
+import com.fatih.todolist.exception.NotFoundException;
 import com.fatih.todolist.repository.TodoRepository;
 import com.fatih.todolist.service.ITodoService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class TodoServiceImpl implements ITodoService {
         if(todo.isPresent()){
             return todo;
         } else {
-            throw new TodoNotFoundException("Todo with id " + id + " not found!");
+            throw new NotFoundException("Todo", id);
         }
     }
 
@@ -40,7 +40,7 @@ public class TodoServiceImpl implements ITodoService {
     @Override
     public Todo updateTodo(Long id, Todo updatedTodo) {
         Todo todo = getTodoByID(id)
-                .orElseThrow(() -> new TodoNotFoundException("Todo with id " + id + " not found!"));
+                .orElseThrow(() -> new NotFoundException("Todo", id));
         todo.setTitle(updatedTodo.getTitle());
         todo.setDescription(updatedTodo.getDescription());
         todo.setCompleted(updatedTodo.isCompleted());
@@ -55,7 +55,7 @@ public class TodoServiceImpl implements ITodoService {
             todoRepository.deleteById(id);
             return true;
         } else {
-            throw new TodoNotFoundException("Todo with id " + id + "not found!");
+            throw new NotFoundException("Todo", id);
         }
     }
 
