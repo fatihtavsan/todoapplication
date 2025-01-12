@@ -7,10 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Table(name = "todos")
 public class Todo {
 
@@ -18,13 +18,17 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "todo_id")
     private Long id;
+
     @NotBlank(message = "Title cannot be empty!")
     @Size(max = 100, message = "Title length less than 100 characters")
     @Column(name = "todo_title", nullable = false)
     private String title;
+
     @Column(name = "todo_description")
     private String description;
+
     @Column(name = "todo_completed", nullable = false)
     private boolean completed;
+
 
 }
