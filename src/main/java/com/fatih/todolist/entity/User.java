@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_name")
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "user_name", nullable = false, unique = true)
